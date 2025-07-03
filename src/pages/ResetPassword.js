@@ -11,7 +11,7 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const handleReset = async () => {
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/users/reset-password`,  {
+      const res = await axios.post(`${API_BASE_URL}/users/reset-password`,  {
         email,
         otp,
         newPassword,

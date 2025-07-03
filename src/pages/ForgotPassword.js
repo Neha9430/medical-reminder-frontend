@@ -10,7 +10,7 @@ const ForgotPassword = () => {
 
   const handleSendOTP = async () => {
     try {
-      await axios.post(`${API_BASE_URL}/api/users/forgot-password`, { email });
+      await axios.post(`${API_BASE_URL}/users/forgot-password`, { email });
 
      
       localStorage.setItem("resetEmail", email);

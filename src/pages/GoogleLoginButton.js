@@ -14,7 +14,7 @@ const GoogleLoginButton = () => {
     console.log("Google User Info:", decoded);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/users/google-login`, {
+      const res = await axios.post(`${API_BASE_URL}/users/google-login`, {
         name: decoded.name,
         email: decoded.email,
       });

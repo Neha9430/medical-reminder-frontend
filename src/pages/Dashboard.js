@@ -21,7 +21,7 @@ const Dashboard = () => {
       if (!userId) return;
       try {
         const res = await axios.get(
-          `${API_BASE_URL}/api/reminders/upcoming/${userId}`
+          `${API_BASE_URL}/reminders/upcoming/${userId}`
         );
         setReminders(res.data);
       } catch (error) {

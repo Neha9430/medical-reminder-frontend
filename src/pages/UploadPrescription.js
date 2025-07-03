@@ -24,7 +24,7 @@ const UploadPrescription = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/prescriptions/upload-prescription",
+        "http://localhost:5000/prescriptions/upload-prescription",
         formData,
         {
           headers: {

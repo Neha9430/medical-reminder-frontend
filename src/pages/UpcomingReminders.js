@@ -93,7 +93,7 @@ const UpcomingReminders = () => {
       return;
 
     try {
-      await axios.delete(`${API_BASE_URL}/api/reminders/delete/${id}`, {
+      await axios.delete(`${API_BASE_URL}/reminders/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Reminder deleted!");
