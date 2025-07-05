@@ -1,6 +1,7 @@
 // src/components/ReminderForm.js
 import React, { useState } from "react";
 import axios from "axios";
+import API_BASE_URL from "../config";
 
 const ReminderForm = () => {
   const [medicineName, setMedicineName] = useState("");
@@ -18,9 +19,11 @@ const ReminderForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
+   try {
       const userId = localStorage.getItem("userId");
-      const res = await axios.post("http://localhost:5000/api/reminders/create", {
+      const res = await axios.post(
+        `${API_BASE_URL}/reminders/create`, 
+        {
         userId,
         medicineName,
         times,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config"; 
 
 import "./UploadPrescription.css";
 
@@ -24,7 +25,7 @@ const UploadPrescription = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/prescriptions/upload-prescription",
+        `${API_BASE_URL}/prescriptions/upload-prescription`,
         formData,
         {
           headers: {
