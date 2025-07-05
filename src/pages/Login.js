@@ -17,10 +17,13 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(`${API_BASE_URL}/users/login`, {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${API_BASE_URL}/users/login`,
+        { email, password },
+        {
+          withCredentials: true, // ✅ यह CORS + cookies के लिए जरूरी है
+        }
+      );
 
       const token = res.data.token;
       const name = res.data.name;
