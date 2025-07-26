@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import API_BASE_URL from "../config"; 
+import API_BASE_URL from "../config";
 
 import "./UploadPrescription.css";
 
@@ -59,52 +59,50 @@ const UploadPrescription = () => {
   };
 
   const handleSaveReminder = async () => {
-  const userId = localStorage.getItem("userId");
-  if (!userId) return alert("User not found!");
+    const userId = localStorage.getItem("userId");
+    if (!userId) return alert("User not found!");
 
-  let savedAny = false;
+    let savedAny = false;
 
-  try {
-    for (let i = 0; i < parsedData.medicines.length; i++) {
-      const med = parsedData.medicines[i];
-      const input = reminderInputs[i];
+    try {
+      for (let i = 0; i < parsedData.medicines.length; i++) {
+        const med = parsedData.medicines[i];
+        const input = reminderInputs[i];
 
-      const { startDate, endDate, time } = input;
+        const { startDate, endDate, time } = input;
 
-      // 🔐 Check if all fields are set
-      if (startDate && endDate && time) {
-        await axios.post("http://localhost:5000/api/reminders/create", {
-          userId,
-          medicineName: med,
-          times: [time],
-          startDate,
-          endDate,
-          taken: false,
-        });
-        savedAny = true;
+        // 🔐 Check if all fields are set
+        if (startDate && endDate && time) {
+          await axios.post(`${API_BASE_URL}/reminders/create`, {
+            userId,
+            medicineName: med,
+            times: [time],
+            startDate,
+            endDate,
+            taken: false,
+          });
+          savedAny = true;
+        }
       }
-    }
 
-    if (savedAny) {
-      alert("Selected medicine reminders saved successfully!");
-      navigate("/upcoming-reminders");
-    } else {
-      alert(" No valid reminders to save. Please set date/time.");
+      if (savedAny) {
+        alert("Selected medicine reminders saved successfully!");
+        navigate("/upcoming-reminders");
+      } else {
+        alert(" No valid reminders to save. Please set date/time.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error saving reminders");
     }
-  } catch (err) {
-    console.error(err);
-    alert("Error saving reminders");
-  }
-};
+  };
 
   const getPurpose = async (medicineName) => {
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/ai/medicine-purpose",
-        {
-          medicineName,
-        }
-      );
+      const res = await axios.post(`${API_BASE_URL}/ai/medicine-purpose`, {
+        medicineName,
+      });
+
       alert(` ${medicineName}: ${res.data.purpose}`);
     } catch (err) {
       console.error("Error fetching AI purpose:", err);
